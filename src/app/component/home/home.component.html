@@ -1,0 +1,60 @@
+<div class="container-fluid">
+    <div class="row header-search d-flex align-items-end mb-2">
+      <div class="col-md-3 me-3">
+        <app-my-input titleInput="Tên" (newItemInput)="valueSearchName($event)"></app-my-input>
+      </div>        
+      <div class="col-md-3">
+        <app-my-select titleSelect="Trạng thái" [listSelect]="listStatusReadBook" (newItemSelect)="valueSearchStatus($event)"></app-my-select>          
+      </div>           
+    </div>
+    <div class="list-book mb-3">
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Tên</th>
+                <th scope="col">Trạng thái</th>
+                <th scope="col">Ngày tạo</th>
+                <th scope="col">Tùy chọn</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let book of books | filter : searchNameBook : searchStatusBook">
+                <th scope="row">{{book.id}}</th>
+                <td>
+                  <input type="text" *ngIf="isEditable && editIndex == book.id" class="form-control" [(ngModel)]="nameBookToEdit" />
+                  <span *ngIf="!isEditable || editIndex != book.id">{{book.name}}</span>
+                </td>
+                <td>
+                  <div *ngIf="isEditable && editIndex == book.id">
+                    <div>
+                        <select class="form-select" [(ngModel)]="statusBookToEdit">
+                          <option *ngFor="let item of listStatusReadBook" [ngValue]="item">{{item}}</option>
+                        </select>
+                      </div>
+                  </div>
+                  <div *ngIf="!isEditable || editIndex != book.id">
+                    <div *ngIf="book.status == titleRead; then thenStatus else elseStatus">
+                    </div>   
+                    <ng-template #thenStatus>
+                      <p class="text-success">{{book.status}}</p>
+                    </ng-template>                                 
+                    <ng-template #elseStatus> 
+                      <p class="text-danger">{{book.status}}</p>
+                    </ng-template>
+                  </div>                  
+                </td>  
+                <td>
+                  {{book.purchaseDate}}
+                </td>
+                <td>
+                  <button type="button" class="btn btn-danger me-3" (click)="deleteBook(book)">Xóa</button>
+                  <button *ngIf="!isEditable || editIndex != book.id" type="button" class="btn btn-warning" (click)="updateBook(book)">Sửa</button>
+                  <button *ngIf="isEditable && editIndex == book.id" type="button" class="btn btn-warning" (click)="saveBook()">Lưu</button>
+                </td>
+              </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+

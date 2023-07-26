@@ -1,0 +1,12 @@
+.container-fluid{
+    height: 100%;
+}
+
+.header-search{
+    height: 60px;
+}
+
+.list-book{
+    height: calc(100% - 120px);
+    overflow: auto;
+}

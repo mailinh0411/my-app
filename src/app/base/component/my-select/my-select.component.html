@@ -1,0 +1,7 @@
+<div>
+    <label for="">{{titleSelect}}</label>
+    <select class="form-select" [(ngModel)]="selectedOption" (change)="changeSelect(selectedOption)">
+        <option value="">Tất cả</option>
+        <option *ngFor="let item of listSelect">{{item}}</option>
+    </select>
+</div>

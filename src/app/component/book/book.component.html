@@ -1,0 +1,40 @@
+<div class="container-fluid">
+    <h2 class="">Thêm mới sách</h2>
+    <div class="main-body"> 
+        <form [formGroup]="form">
+          <div formArrayName="books" *ngFor="let book of books.controls; let i = index">
+            <ng-container [formGroupName]="i">
+              <div class="d-flex align-items-end mb-2">
+                <div class="me-3 flex-fill">
+                  <label for="">Id</label>
+                  <input type="text" class="form-control" id="book-id" formControlName="id"/>
+                </div>
+                <div class="me-3 flex-fill">
+                  <label for="">Tên</label>
+                  <input type="text" class="form-control" id="book-name" formControlName="name"/>
+                </div>
+                <div class="me-3 flex-fill">
+                  <label for="">Ngày mua</label>
+                  <input type="date" class="form-control" id="purchase-date" formControlName="purchaseDate"/>
+                </div>
+                <div class="me-3 flex-fill">
+                  <label for="">Trạng thái</label>
+                  <select class="form-select" formControlName="status">
+                    <option *ngFor="let item of listSelect" [ngValue]="item">{{item}}</option>
+                  </select>
+                </div>
+                <div>
+                  <button type="button" class="btn btn-danger" (click)="removeBook(i)">Xóa</button>
+                </div>
+              </div>    
+            </ng-container>
+          </div>
+          <button type="button" class="btn btn-info mt-1" (click)="addBook()">Thêm</button>
+        </form>
+    </div>
+    <div class="float-end">
+        <button type="button" class="btn btn-secondary me-3" data-bs-dismiss="modal" (click)="closeModal()">Đóng</button>
+        <button type="button" class="btn btn-primary" (click)="saveBooks()">Lưu</button>
+    </div>
+</div>
+  
