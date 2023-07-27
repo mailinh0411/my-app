@@ -11,7 +11,7 @@ import { Book } from 'src/app/data.books';
 export class BookComponent {
   form!: FormGroup;
   booksCurrent: Book[] = [];  
-  listSelect : string[] = ["Chưa đọc", "Đã đọc"]
+  listSelect : string[] = ["Chưa đọc", "Đã đọc"];
 
   constructor(private fb: FormBuilder, private bookService: BookService) {}
 
@@ -56,6 +56,10 @@ export class BookComponent {
     let book: Book;
     for(let i = 0; i < this.books.controls.length; i++){      
       let element = this.books.controls[i];
+      if(isNaN(element.value.id)){
+        alert("Id phải là số.");
+        return;
+      }
       book = {id: parseInt(element.value.id), name: element.value.name, purchaseDate: element.value.purchaseDate, status: element.value.status};
       if(!this.validateBook(book, booksNew)){
         isCheckAddError = false;
@@ -70,10 +74,6 @@ export class BookComponent {
   }
 
   validateBook(book: Book, list: Book[]) : boolean{
-    if(list.findIndex((u) => u.id === book.id) >= 0){
-      alert("Id không được trùng.");
-      return false;
-    }
     if(book.id.toString().length > 5){
       alert("Số ký tự của id phải <= 5.");
       return false;
@@ -82,6 +82,10 @@ export class BookComponent {
       alert("Id phải là số.");
       return false;
     }
+    if(list.findIndex((u) => u.id === book.id) >= 0){
+      alert("Id " + book.id + " đã bị trùng.");
+      return false;
+    }    
     if(!book.name){
       alert("Tên sách không được để trống.");
       return false;
@@ -91,7 +95,7 @@ export class BookComponent {
     if(date > now){
       alert("Ngày mua phải nhỏ hơn ngày hiện tại.");
       return false;
-    } 
+    }
     return true;
   }
 }

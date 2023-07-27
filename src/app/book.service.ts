@@ -15,14 +15,6 @@ export class BookService {
 
   constructor() { this.books; }
 
-  // getBooks(){
-  //   return this.books = Books;
-  // }
-    
-  // setBooks(list : Book[]){
-  //   this.books = list;
-  // }
-
   updateBook(book: Book){
     if(!book.name){
       alert("Tên sách không được để trống"); 

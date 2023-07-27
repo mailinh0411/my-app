@@ -13,18 +13,17 @@
   </header>
   <div class="content">
     <div class="row h-100">
-      <div class="col-md-2 navbar">      
+      <div class="col-md-2 navbar p-0">      
         <div class="navbar-menu">
-          <a routerLink="/manage-book" class="navbar-link ps-4">Quản lý sách</a>
-          <a routerLink="/add-book" class="navbar-link ps-4">Thêm mới sách</a>
+          <a routerLink="/manage-book" class="navbar-link ps-5" [routerLinkActive]="['active']">Quản lý sách</a>
+          <a routerLink="/add-book" class="navbar-link ps-5" [routerLinkActive]="['active']">Thêm mới sách</a>
         </div>
       </div>
       <div class="col-md-10" style="height: 100%;">
         <router-outlet></router-outlet>
       </div>
     </div>
-  </div>
-  
+  </div>  
   <footer class="bg-dark text-white pt-5 pb-4">
     <div class="row text-center">
       <div class="col-md-6 col-lg-6 col-xl-6 mx-auto">

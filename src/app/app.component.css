@@ -28,7 +28,7 @@
 }
 
 .content{
-    height: calc(100vh - 200px);
+    height: calc(100vh - 230px);
 }
 
 .navbar{
@@ -55,9 +55,6 @@
     background-color: rgb(215, 230, 245);
 }
 
-
-
-
-
-
-
+.navbar .active {
+    background-color: rgb(202, 220, 238);
+}
